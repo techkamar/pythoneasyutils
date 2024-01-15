@@ -1,5 +1,7 @@
 #! /usr/bin/python3
 import os
+import sys
+
 
 def mkfolder(foldername):
 	command = f"mkdir {foldername}"
@@ -12,7 +14,7 @@ def movefile(filename,foldername):
 	print(f"Running {command}")
 	os.system(command)
 
-def main():
+def main(file_group_count):
 	all_files = os.listdir(os.getcwd())
 	print(all_files)
 	all_files.sort()
@@ -20,7 +22,7 @@ def main():
 	folder_number = 0
 	while index < len(all_files):
 		mkfolder(folder_number)
-		for counter in range(0,100):
+		for counter in range(0,file_group_count):
 			print(f"[+] Moving file {index}/{len(all_files)}")
 			if index < len(all_files):
 				movefile(all_files[index],folder_number)
@@ -28,4 +30,5 @@ def main():
 		# Change folder
 		folder_number+=1
 if __name__ == "__main__":
-	main()
+	file_group_count = int(sys.argv[1])
+	main(file_group_count)
